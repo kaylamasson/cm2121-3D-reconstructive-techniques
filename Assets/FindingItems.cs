@@ -5,8 +5,8 @@ using UnityEngine;
 public class FindingItems : MonoBehaviour
 {
 
-    private int piecesFound = 0; 
-    public InventoryController inventory;
+    //private int piecesFound = 0; 
+    public InventoryController inventory; //player inventory
 
     
     //public GameObject[] collectedItems = new GameObject[6]; //pieces collected - inventory
@@ -33,7 +33,7 @@ public class FindingItems : MonoBehaviour
 
         if (collider.gameObject.tag == "Painting"){
             //Debug.Log("Piece found!");
-            piecesFound ++; 
+            //piecesFound ++; 
             //Debug.Log("You have - " + piecesFound + " - pieces.");
 
             //find piece in item array
@@ -44,9 +44,12 @@ public class FindingItems : MonoBehaviour
                 if (GameObject.ReferenceEquals(inventory.getGamePieces(i), collider.gameObject))
                 {
                     //Debug.Log("piece matches");
+
                     //add item to inventory
+
                     //collectedItems[collectedItems.Length] = itemPieces[i];
-                    inventory.collectItem(inventory.getItemPieces(i));
+
+                    inventory.collectItem(inventory.getItemPieces(i)); //calls inventory method to add piece to collected array
 
                     //Debug.Log("item collected");
                     break;

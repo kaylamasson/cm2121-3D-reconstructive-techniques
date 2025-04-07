@@ -6,6 +6,11 @@ using UnityEngine.EventSystems;
 public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
+    // to implement the draggable items feature, i 
+    // used the following YouTube video as a reference: 
+    // https://www.youtube.com/watch?v=wlBJ0yZOYfM&list=PLaaFfzxy_80HtVvBnpK_IjSC8_Y9AOhuP&index=9
+    
+
     public Transform originalParent;
     public CanvasGroup canvasGroup;
 
@@ -20,7 +25,6 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
        originalParent = transform.parent;  //save original parent
        transform.SetParent(transform.root); //above any other canvases
        canvasGroup.blocksRaycasts = false;
-       //canvasGroup.alpha = 0.6f; //semi-transparent on drag
 
     }
 
@@ -32,7 +36,6 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true; //enables raycasts - clickable
-        //canvasGroup.alpha = 1; //not transparent
         
         Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>(); //slot where item dropped
         

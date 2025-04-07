@@ -9,22 +9,27 @@ using UnityEngine.UI;
 public class InventoryController : MonoBehaviour
 {
 
+
+    //variables 
+  
     public GameObject inventoryPanel; //where slots will be placed
     public GameObject slotPrefab;
-    public int slotCount;
+    public int slotCount; //6 slots in inventory
     
     public GameObject[] gamePieces; //3D pieces
     public GameObject[] itemPieces; //2D assets for inventory
     public GameObject[] collectedItems = new GameObject[6]; //items in inventory
 
-    public bool[] correctPieces = {false, false, false, false, false, false}; 
-    public Slot[] slots = new Slot[6];
+    public bool[] correctPieces = {false, false, false, false, false, false}; //update each slot when correct piece is placed 
+    public Slot[] slots = new Slot[6]; //inventory slots
+
     //public int itemIndex; //index of the painting piece collected
 
     //public Slot slot;
     public int itemsCollected = 0;
     public bool puzzleCorrect = false;
 
+    public int availableSlot = 0;
 
     void Start()
     {
@@ -91,7 +96,7 @@ public class InventoryController : MonoBehaviour
     public void collectItem(GameObject piece)
     {
       //Debug.Log("item collected");
-      collectedItems[itemsCollected] = piece; //problem 
+      collectedItems[itemsCollected] = piece;  
       //Debug.Log("added to inventory");
 
       addToInventory();
@@ -102,18 +107,30 @@ public class InventoryController : MonoBehaviour
 
       //if there is an available slot
         if (itemsCollected < collectedItems.Length){
+            
 
+            //find first null slot in inventory
+            for (int i=0; i < slotCount; i++){
+              if (slots[i].currentItem == null){
+                availableSlot = i; 
+                break;
+              }
+            }
             //place items from array into slots
-            GameObject item = Instantiate(collectedItems[itemsCollected], slots[itemsCollected].transform);
+            //items are placed into the first available empty slots
+            GameObject item = Instantiate(collectedItems[itemsCollected], slots[availableSlot].transform);
 
             //make item centered to slot
             item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            slots[itemsCollected].currentItem = item; //set current item 
+            slots[availableSlot].currentItem = item; //set current item 
 
+            //increase number of items collected
             itemsCollected ++;
         }
     }
 
+
+    //getters
     public GameObject getGamePieces(int index)
     {
       return gamePieces[index];
