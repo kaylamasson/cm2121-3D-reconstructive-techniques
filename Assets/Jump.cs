@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    //private Animator animator; 
     public Animator animator;
     public int jumpSpeed; 
     public string jumpKey; 
@@ -16,11 +15,15 @@ public class Jump : MonoBehaviour
     public bool isFalling;
 
 
+    //movement
+
+    //public int characterSpeed = 2; 
+
+
     // Start is called before the first frame update
     void Start()
     {
 
-     //animator = GetComponent<Animator>();
      rb = this.GetComponent<Rigidbody>();
      animator = this.GetComponent<Animator>();
 
@@ -30,18 +33,30 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isGrounded);
+
 
         //update animators
         animator.SetBool("Jump", isJumping);
         animator.SetBool("Grounded", isGrounded);
-        animator.SetBool("FreeFall", isFalling);
+        //animator.SetBool("FreeFall", isFalling);
        
+        
+    }
 
-        if ((Input.GetKey(jumpKey))){
+
+    void FixedUpdate()
+    {
+    
+        //character can only jump when they are grounded
+        if ((Input.GetKey(jumpKey)) && isGrounded){
             isJumping = true;
-            rb.AddForce(new Vector3(0, jumpSpeed, 0));
+            rb.velocity = new Vector3(0, jumpSpeed, 0);
             isGrounded = false;
         }
+
+        //rb.velocity = Input.GetAxis("Vertical") * transform.forward * characterSpeed;
+
     }
 
     void OnCollisionEnter() {
@@ -49,7 +64,8 @@ public class Jump : MonoBehaviour
         isJumping = false;
         //Debug.Log("collision");
     }
-    
-        
-    
+
+    void OnCollisionExit(){
+        isJumping = true;
+    }
 }

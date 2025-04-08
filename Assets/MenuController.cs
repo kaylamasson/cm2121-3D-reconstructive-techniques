@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour
        //open menu when tab is pressed
 
        if (Input.GetKeyDown(menuKey)){
-            Debug.Log("menu key pressed");
+            //Debug.Log("menu key pressed");
             if (menuCanvas.activeInHierarchy == true){
                 menuCanvas.SetActive(false);
                 rb.constraints = originalConstraints; //resets player rotation to normal once menu is closed
