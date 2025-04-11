@@ -66,6 +66,6 @@ public class Jump : MonoBehaviour
     }
 
     void OnCollisionExit(){
-        isJumping = true;
+        //isJumping = true;
     }
 }

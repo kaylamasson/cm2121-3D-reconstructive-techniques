@@ -31,8 +31,12 @@ public class InventoryController : MonoBehaviour
 
     public int availableSlot = 0;
 
+    public bool roomComplete;
+    public GameObject completeText;
     void Start()
     {
+
+      completeText.SetActive(false);
 
       for (int i=0; i<slotCount; i++){
         slots[i] = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<Slot>(); //create slots in grid
@@ -86,7 +90,17 @@ public class InventoryController : MonoBehaviour
         {
           //if all true
           //room complete!
-        Debug.Log("Room complete! Well done");
+
+          roomComplete = true;
+
+
+          //Debug.Log("Room complete! Well done");
+        }
+
+
+        if (roomComplete)
+        {
+          completeText.SetActive(true);
         }
         
         
