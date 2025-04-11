@@ -14,6 +14,9 @@ public class Jump : MonoBehaviour
     public bool isJumping;
     public bool isFalling;
 
+    public bool doubleJump = true; 
+    public int jumpCount = 0; 
+
 
     //movement
 
@@ -41,19 +44,30 @@ public class Jump : MonoBehaviour
         animator.SetBool("Grounded", isGrounded);
         //animator.SetBool("FreeFall", isFalling);
        
-        
+         Debug.Log(jumpCount);
+    
+
+        //character can only jump when they are grounded
+        if ((Input.GetKeyDown(jumpKey)) && doubleJump){
+            isJumping = true;
+            rb.velocity = new Vector3(0, jumpSpeed, 0);
+            isGrounded = false;
+
+            jumpCount ++; 
+            
+
+            if (jumpCount == 2)
+            {
+                doubleJump = false;
+            } 
+        }
     }
 
 
     void FixedUpdate()
     {
-    
-        //character can only jump when they are grounded
-        if ((Input.GetKey(jumpKey)) && isGrounded){
-            isJumping = true;
-            rb.velocity = new Vector3(0, jumpSpeed, 0);
-            isGrounded = false;
-        }
+
+       
 
         //rb.velocity = Input.GetAxis("Vertical") * transform.forward * characterSpeed;
 
@@ -63,6 +77,9 @@ public class Jump : MonoBehaviour
         isGrounded = true;
         isJumping = false;
         //Debug.Log("collision");
+
+        doubleJump = true;
+        jumpCount = 0; 
     }
 
     void OnCollisionExit(){
