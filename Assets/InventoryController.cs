@@ -33,6 +33,8 @@ public class InventoryController : MonoBehaviour
 
     public bool roomComplete;
     public GameObject completeText;
+
+
     void Start()
     {
 

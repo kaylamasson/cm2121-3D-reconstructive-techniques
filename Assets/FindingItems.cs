@@ -7,6 +7,10 @@ public class FindingItems : MonoBehaviour
 
     //private int piecesFound = 0; 
     public InventoryController inventory; //player inventory
+    
+    public AudioSource audioSource; 
+
+
 
     
     //public GameObject[] collectedItems = new GameObject[6]; //pieces collected - inventory
@@ -17,6 +21,7 @@ public class FindingItems : MonoBehaviour
 
      inventory = GameObject.Find("GameController").GetComponent<InventoryController>();
 
+     audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -35,6 +40,12 @@ public class FindingItems : MonoBehaviour
             //Debug.Log("Piece found!");
             //piecesFound ++; 
             //Debug.Log("You have - " + piecesFound + " - pieces.");
+
+
+            //play 'collect' sound effect
+
+            audioSource.Play();
+
 
             //find piece in item array
 
