@@ -6,13 +6,15 @@ using UnityEngine.EventSystems;
 public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-    // to implement the draggable items feature, i 
+    // to implement the draggable items feature, I 
     // used the following YouTube video as a reference: 
     // https://www.youtube.com/watch?v=wlBJ0yZOYfM&list=PLaaFfzxy_80HtVvBnpK_IjSC8_Y9AOhuP&index=9
     
 
     public Transform originalParent;
     public CanvasGroup canvasGroup;
+
+    public AudioSource dropSound;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,10 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+
+        //play sound effect
+        dropSound.Play();
+
         canvasGroup.blocksRaycasts = true; //enables raycasts - clickable
         
         Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>(); //slot where item dropped
