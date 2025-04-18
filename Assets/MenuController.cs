@@ -6,22 +6,26 @@ public class MenuController : MonoBehaviour
 {
 
 
-    public GameObject menuCanvas;
+    public GameObject inventory;
+    public GameObject controls;
 
-    public string menuKey; 
+
+    public string inventoryKey;
+    public string controlsKey; 
     public GameObject player; 
     public Rigidbody rb;
 
     public RigidbodyConstraints originalConstraints;
     public RigidbodyConstraints newConstraints;
+    
 
     // Start is called before the first frame update
     void Start()
     {
 
         //disable menu canvas from start
-        
-        menuCanvas.SetActive(false);
+        controls.SetActive(false);
+        inventory.SetActive(false);
         rb = player.GetComponent<Rigidbody>();
         originalConstraints = rb.constraints;
     }
@@ -31,14 +35,23 @@ public class MenuController : MonoBehaviour
     {
        //open menu when tab is pressed
 
-       if (Input.GetKeyDown(menuKey)){
+       if (Input.GetKeyDown(inventoryKey) && controls.activeInHierarchy == false){
             //Debug.Log("menu key pressed");
-            if (menuCanvas.activeInHierarchy == true){
-                menuCanvas.SetActive(false);
+            if (inventory.activeInHierarchy == true){
+                inventory.SetActive(false);
                 rb.constraints = originalConstraints; //resets player rotation to normal once menu is closed
             } else {
-                menuCanvas.SetActive(true);
+                inventory.SetActive(true);
                 rb.constraints = RigidbodyConstraints.FreezeRotation; //freezes player rotation when menu is open
+            }
+       }
+
+
+       if (Input.GetKeyDown(controlsKey) && inventory.activeInHierarchy == false){
+            if (controls.activeInHierarchy == true){
+                controls.SetActive(false);
+            } else {
+                controls.SetActive(true); 
             }
        }
     }

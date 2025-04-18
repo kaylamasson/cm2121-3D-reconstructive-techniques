@@ -7,6 +7,7 @@ public class CameraRotation : MonoBehaviour
 
     public GameObject camera; 
     public GameObject menu; 
+    public GameObject controls;
 
     //bool tiltCamera = true;
     public float mouseY;
@@ -26,7 +27,7 @@ public class CameraRotation : MonoBehaviour
         //camera can 360 rotate around frog - use limits to stop? 
         
         //if (Input.mousePosition.y > -0.5 && mouseY < 0.5){
-        if (menu.activeInHierarchy == false){
+        if (menu.activeInHierarchy == false && controls.activeInHierarchy == false){
             camera.transform.Rotate(-mouseY, 0f, 0f);
         }
 
