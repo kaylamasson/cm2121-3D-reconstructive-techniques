@@ -17,6 +17,8 @@ public class Jump : MonoBehaviour
     public bool doubleJump = true; 
     public int jumpCount = 0; 
 
+    public AudioSource jumpSound;
+
 
     //movement
 
@@ -52,6 +54,9 @@ public class Jump : MonoBehaviour
             isJumping = true;
             rb.velocity = new Vector3(0, jumpSpeed, 0);
             isGrounded = false;
+
+            //play 'jump' sound effect
+            jumpSound.Play();
 
             jumpCount ++; 
             
