@@ -38,7 +38,7 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
 
 
         //update animators
@@ -46,7 +46,7 @@ public class Jump : MonoBehaviour
         animator.SetBool("Grounded", isGrounded);
         //animator.SetBool("FreeFall", isFalling);
        
-         Debug.Log(jumpCount);
+        //Debug.Log(jumpCount);
     
 
         //character can only jump when they are grounded

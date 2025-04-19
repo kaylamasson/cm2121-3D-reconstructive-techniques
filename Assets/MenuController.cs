@@ -5,9 +5,11 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
 
-
+    //menus 
     public GameObject inventory;
     public GameObject controls;
+    public GameObject intro;
+    public GameObject uiText; 
 
 
     public string inventoryKey;
@@ -23,9 +25,17 @@ public class MenuController : MonoBehaviour
     void Start()
     {
 
-        //disable menu canvas from start
+        //disable menu pop-ups from start
         controls.SetActive(false);
         inventory.SetActive(false);
+
+        //intro should be displayed from game start
+        intro.SetActive(true); 
+
+        //ui text always active
+        uiText.SetActive(true);
+
+        //get player rigidbody to freeze rotation 
         rb = player.GetComponent<Rigidbody>();
         originalConstraints = rb.constraints;
     }
@@ -38,19 +48,26 @@ public class MenuController : MonoBehaviour
        if (Input.GetKeyDown(inventoryKey) && controls.activeInHierarchy == false){
             //Debug.Log("menu key pressed");
             if (inventory.activeInHierarchy == true){
+
                 inventory.SetActive(false);
                 rb.constraints = originalConstraints; //resets player rotation to normal once menu is closed
+            
             } else {
+
                 inventory.SetActive(true);
                 rb.constraints = RigidbodyConstraints.FreezeRotation; //freezes player rotation when menu is open
+           
             }
        }
 
 
        if (Input.GetKeyDown(controlsKey) && inventory.activeInHierarchy == false){
             if (controls.activeInHierarchy == true){
+              
                 controls.SetActive(false);
+
             } else {
+             
                 controls.SetActive(true); 
             }
        }
